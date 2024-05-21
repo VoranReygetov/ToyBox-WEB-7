@@ -1,0 +1,37 @@
+:root{
+    --background-color: black;
+}
+body{
+    background-color: var(--background-color);
+}
+html, body, div, span, h1, h2, h3, h4, p, a, li, table, th, td, ol, ul{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+ol, ul{
+    list-style: none;
+}
+
+.gallery {
+    /* display: flex;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.gallery-item {
+    margin: 10px;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.1);
+}
