@@ -1,50 +1,51 @@
 const images = [
     {
-        preview: 'http://127.0.0.1:5500/imgs/brown_small.png',
-        original: 'http://127.0.0.1:5500/imgs/brown_big.png',
+        preview: 'imgs/brown_small.png',
+        original: 'imgs/brown_big.png',
         description: 'Large painting on display in a museum.',
     },
     {
-        preview: 'http://127.0.0.1:5500/imgs/white_small.png',
-        original: 'http://127.0.0.1:5500/imgs/white_big.png',
+        preview: 'imgs/white_small.png',
+        original: 'imgs/white_big.png',
         description: 'Art gallery with white walls and a hardwood floor.',
     },
     {
-        preview: 'http://127.0.0.1:5500/imgs/yellow_small.png',
-        original: 'http://127.0.0.1:5500/imgs/yellow_big.png',
+        preview: 'imgs/yellow_small.png',
+        original: 'imgs/yellow_big.png',
         description: 'How I Opened My Own Photo Gallery',
     },
     {
-        preview: 'http://127.0.0.1:5500/imgs/yellow_small.png',
-        original: 'http://127.0.0.1:5500/imgs/yellow_big.png',
+        preview: 'imgs/yellow_small.png',
+        original: 'imgs/yellow_big.png',
         description: 'How I Opened My Own Photo Gallery',
     },
     {
-        preview: 'http://127.0.0.1:5500/imgs/brown_small.png',
-        original: 'http://127.0.0.1:5500/imgs/brown_big.png',
+        preview: 'imgs/brown_small.png',
+        original: 'imgs/brown_big.png',
         description: 'Large painting on display in a museum.',
     },
     {
-        preview: 'http://127.0.0.1:5500/imgs/white_small.png',
-        original: 'http://127.0.0.1:5500/imgs/white_big.png',
+        preview: 'imgs/white_small.png',
+        original: 'imgs/white_big.png',
         description: 'Art gallery with white walls and a hardwood floor.',
     },
     {
-        preview: 'http://127.0.0.1:5500/imgs/white_small.png',
-        original: 'http://127.0.0.1:5500/imgs/white_big.png',
+        preview: 'imgs/white_small.png',
+        original: 'imgs/white_big.png',
         description: 'Art gallery with white walls and a hardwood floor.',
     },
     {
-        preview: 'http://127.0.0.1:5500/imgs/yellow_small.png',
-        original: 'http://127.0.0.1:5500/imgs/yellow_big.png',
+        preview: 'imgs/yellow_small.png',
+        original: 'imgs/yellow_big.png',
         description: 'How I Opened My Own Photo Gallery',
     },
     {
-        preview: 'http://127.0.0.1:5500/imgs/brown_small.png',
-        original: 'http://127.0.0.1:5500/imgs/brown_big.png',
+        preview: 'imgs/brown_small.png',
+        original: 'imgs/brown_big.png',
         description: 'Large painting on display in a museum.',
     },
 ];
+
 
 const gallery = document.querySelector('.gallery');
 
@@ -83,10 +84,8 @@ gallery.addEventListener('click', event => {
         const instance = createLightbox(imageSrc, imageAlt);
         instance.show();
 
-        // Знаходження поточного індексу зображення
         currentIndex = images.findIndex(image => image.original === imageSrc);
 
-        // Додавання кнопок
         const lightbox = document.querySelector('.basicLightbox');
         let lightboxImg = document.querySelector('.basicLightbox__placeholder img');
         lightboxImg.id = 'big-image';
@@ -106,7 +105,6 @@ gallery.addEventListener('click', event => {
         `;
         lightbox.innerHTML += index;
 
-        // Додавання обробників подій для кнопок
         document.getElementById('prev').addEventListener('click', () => {
             const newIndex = (currentIndex - 1 + images.length) % images.length;
             updateLightboxImage(newIndex);
