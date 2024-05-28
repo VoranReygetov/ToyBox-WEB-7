@@ -1,5 +1,3 @@
-// scripts.js
-
 const images = [
     {
         preview: 'http://127.0.0.1:5500/imgs/brown_small.png',
@@ -50,25 +48,73 @@ const images = [
 
 const gallery = document.querySelector('.gallery');
 
-// Розмітка елементів галереї та додавання її всередину ul.gallery
-const galleryItems = images.map(image => `
+function fullGalleryItems() {
+    const galleryItems = images.map(image => `
     <li class="gallery-item">
         <img src="${image.preview}" data-source="${image.original}" alt="${image.description}">
     </li>
-`).join('');
+    `).join('');
+    gallery.innerHTML = galleryItems;
+}
+fullGalleryItems();
 
-gallery.innerHTML = galleryItems;
+function createLightbox(imageSrc, imageAlt) {
+    return basicLightbox.create(`
+        <img src="${imageSrc}" alt="${imageAlt}">
+    `);
+}
 
-// Додавання обробника подій для відкриття модального вікна
+let currentIndex;
+
+function updateLightboxImage(index) {
+    const lightboxImg = document.querySelector('.basicLightbox__placeholder img');
+    lightboxImg.src = images[index].original;
+    lightboxImg.alt = images[index].description;
+    currentIndex = index;
+    const lightbox = document.querySelector('.index_placement');
+    lightbox.innerHTML = `<span id="img_index">${currentIndex+1}/${images.length}</span>`;
+}
+
 gallery.addEventListener('click', event => {
     if (event.target.tagName === 'IMG') {
         const imageSrc = event.target.dataset.source;
         const imageAlt = event.target.alt;
 
-        const instance = basicLightbox.create(`
-            <img src="${imageSrc}" alt="${imageAlt}">
-        `);
-
+        const instance = createLightbox(imageSrc, imageAlt);
         instance.show();
+
+        // Знаходження поточного індексу зображення
+        currentIndex = images.findIndex(image => image.original === imageSrc);
+
+        // Додавання кнопок
+        const lightbox = document.querySelector('.basicLightbox');
+        let lightboxImg = document.querySelector('.basicLightbox__placeholder img');
+        lightboxImg.id = 'big-image';
+        
+        const buttons = `
+        <div class="buttons">
+            <button id="prev">&lt;</button>
+            <button id="next">&gt;</button>
+        </div>
+        `;
+        lightbox.innerHTML += buttons;
+
+        const index = `
+        <div class="index_placement">
+            <span id="img_index">${currentIndex+1}/${images.length}</span>
+        </div>
+        `;
+        lightbox.innerHTML += index;
+
+        // Додавання обробників подій для кнопок
+        document.getElementById('prev').addEventListener('click', () => {
+            const newIndex = (currentIndex - 1 + images.length) % images.length;
+            updateLightboxImage(newIndex);
+        });
+
+        document.getElementById('next').addEventListener('click', () => {
+            const newIndex = (currentIndex + 1) % images.length;
+            updateLightboxImage(newIndex);
+        });
     }
 });

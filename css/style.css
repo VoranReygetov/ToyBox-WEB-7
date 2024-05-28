@@ -4,7 +4,7 @@
 body{
     background-color: var(--background-color);
 }
-html, body, div, span, h1, h2, h3, h4, p, a, li, table, th, td, ol, ul{
+html, body, div, span, h1, h2, h3, h4, p, a, li, table, th, td, ol, ul, img, button{
     padding: 0;
     margin: 0;
     border: 0;
@@ -13,16 +13,22 @@ ol, ul{
     list-style: none;
 }
 
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    position: relative;
+}
 .gallery {
-    /* display: flex;
-    flex-wrap: wrap; */
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: auto;
 }
 
 .gallery-item {
-    margin: 10px;
+    box-sizing: border-box;
 }
 
 .gallery-item img {
@@ -34,4 +40,70 @@ ol, ul{
 
 .gallery-item img:hover {
     transform: scale(1.1);
+}
+
+.buttons{
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#prev, #next{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff5;
+    color: white;
+    border: none;
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    transition: 0.25s;
+    z-index: 2;
+}
+#img_index{
+    color: white;
+    border: none;
+    background-color: none;
+    font-family: sans-serif;
+    font-size: 24px;
+    z-index: 2;
+}
+
+#prev:hover, #next:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.index_placement{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+#big-image{
+    max-width: 75vw;
+    max-height: 75vh;
+    box-sizing: border-box;
+}
+
+.change-task{
+    position: absolute;
+    box-sizing : content-box;
+    top: 93%;
+    left: 90%;
+    z-index: 0;
+    height: 1.5rem;
+    border-radius: 2px;
+    padding: 4px;
+    background-color: #4F4F4F;
+    color: #FFFFFF;
+    border: 1px solid #878787;
+    cursor: pointer;
+}
+.change-task:hover{
+    background-color: #606060;
 }
