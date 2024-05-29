@@ -86,7 +86,8 @@ gallery.addEventListener('click', event => {
     const instance = createLightbox(imageSrc, imageAlt);
     instance.show();
 
-    currentIndex = images.findIndex(image => image.original === imageSrc);
+    const images = Array.from(gallery.children);
+    currentIndex = images.indexOf(target.parentElement);
 
     const lightbox = document.querySelector('.basicLightbox');
     let lightboxImg = document.querySelector('.basicLightbox__placeholder img');
