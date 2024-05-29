@@ -77,42 +77,39 @@ function updateLightboxImage(index) {
 }
 
 gallery.addEventListener('click', event => {
-    if (event.target.tagName === 'IMG') {
-        const imageSrc = event.target.dataset.source;
-        const imageAlt = event.target.alt;
+    const target = event.target;
+    if (target.tagName !== 'IMG') return;
 
-        const instance = createLightbox(imageSrc, imageAlt);
-        instance.show();
+    const imageSrc = target.dataset.source;
+    const imageAlt = target.alt;
 
-        currentIndex = images.findIndex(image => image.original === imageSrc);
+    const instance = createLightbox(imageSrc, imageAlt);
+    instance.show();
 
-        const lightbox = document.querySelector('.basicLightbox');
-        let lightboxImg = document.querySelector('.basicLightbox__placeholder img');
-        lightboxImg.id = 'big-image';
-        
-        const buttons = `
+    currentIndex = images.findIndex(image => image.original === imageSrc);
+
+    const lightbox = document.querySelector('.basicLightbox');
+    let lightboxImg = document.querySelector('.basicLightbox__placeholder img');
+    lightboxImg.id = 'big-image';
+    
+    lightbox.innerHTML += `
         <div class="buttons">
             <button id="prev">&lt;</button>
             <button id="next">&gt;</button>
         </div>
-        `;
-        lightbox.innerHTML += buttons;
-
-        const index = `
         <div class="index_placement">
-            <span id="img_index">${currentIndex+1}/${images.length}</span>
+            <span id="img_index">${currentIndex + 1}/${images.length}</span>
         </div>
-        `;
-        lightbox.innerHTML += index;
+    `;
 
-        document.getElementById('prev').addEventListener('click', () => {
-            const newIndex = (currentIndex - 1 + images.length) % images.length;
-            updateLightboxImage(newIndex);
-        });
+    document.getElementById('prev').addEventListener('click', () => {
+        const newIndex = (currentIndex - 1 + images.length) % images.length;
+        updateLightboxImage(newIndex);
+    });
 
-        document.getElementById('next').addEventListener('click', () => {
-            const newIndex = (currentIndex + 1) % images.length;
-            updateLightboxImage(newIndex);
-        });
-    }
+    document.getElementById('next').addEventListener('click', () => {
+        const newIndex = (currentIndex + 1) % images.length;
+        updateLightboxImage(newIndex);
+    });
 });
+
